@@ -7,6 +7,7 @@ export function WeatherSearch({ onSearch }) {
   };
 
   const handleSearch = () => {
+    setCity("")
     onSearch(city);
   };
 
@@ -17,17 +18,17 @@ export function WeatherSearch({ onSearch }) {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-4">
+    <div className="flex flex-col md:flex-row gap-4 max-w-xs md:max-w-full">
       <input
         type="text"
-        className="border-0 border-b-4 py-2 border-sky-600 text-xl bg-transparent focus:outline-none focus:border-sky-500"
+        className="font-bold text-3xl border-0 border-b-2 py-2 border-white text-center text-white bg-transparent placeholder:text-white placeholder:font-light focus:outline-none focus:border-sky-100"
         placeholder="Enter city name"
         value={city}
         onChange={handleInputChange}
         onKeyDown={handleKeyPress}
       />
       <button
-        className="bg-sky-600 hover:bg-sky-500 text-white rounded px-6 text-xl py-2"
+        className="text-white text-xl py-2 px-6 bg-transparent font-light border rounded border-white focus:outline-none hover:border-sky-100 hover:text-sky-100"
         onClick={handleSearch}
       >
         Search
