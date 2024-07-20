@@ -4,6 +4,7 @@ import {
   fetchWeatherForecast,
 } from "./services/weatherService";
 import { WeatherSearch } from "./components/WeatherSearch";
+import { WeatherDisplay } from "./components/WeatherDisplay";
 
 function App() {
   const dirArray = ["Clear", "Clouds", "Rain"];
@@ -58,6 +59,11 @@ function App() {
         }
       >
         <WeatherSearch onSearch={setCity} />
+        {currentWeather && (
+          <div className="flex flex-col md:flex-row gap-x-10 w-full">
+            <WeatherDisplay weather={currentWeather} />
+          </div>
+        )}
       </div>
     </main>
   );
