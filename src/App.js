@@ -19,23 +19,19 @@ function App() {
   const randomBackground = () => {
     let randImg = Math.floor(Math.random() * 7);
     setBackgroundImg(`./backgrounds/${weatherDir}/${randImg}.jpg`);
-    console.log(`${weatherDir}/${randImg}`);
   };
 
   const handleSearch = async () => {
     const weatherResponse = await fetchCurrentWeather(city);
-    await setWeatherDir(weatherResponse.data.weather[0].main);
-    console.log(weatherResponse.data.weather[0].main);
-    console.log(weatherDir);
+    setWeatherDir(weatherResponse.data.weather[0].main);
     setCurrentWeather(weatherResponse.data);
-    console.log(weatherResponse.data);
     const forecastResponse = await fetchWeatherForecast(city);
     setForecast(forecastResponse.data);
   };
 
   useEffect(() => {
     randomBackground(); // Викликаємо randomBackground при завантаженні сторінки
-  }, [weatherDir]);
+  }, [currentWeather]);
 
   useEffect(() => {
     if (city) {
@@ -46,7 +42,7 @@ function App() {
   return (
     <main>
       <div
-        className="fixed bg-sky-100 brightness-50 h-screen w-screen"
+        className="fixed bg-sky-100 brightness-[.4] h-screen w-screen"
         style={{
           backgroundImage: `url(${backgroundImg})`,
           backgroundSize: "cover",
@@ -55,12 +51,12 @@ function App() {
       ></div>
       <div
         className={
-          "absolute inset-0 z-10 py-4 min-h-screen w-full flex flex-col items-center lg:justify-center gap-10 container mx-auto"
+          "absolute inset-0 z-10 py-4 px-4 min-h-screen w-full flex flex-col items-center gap-4 lg:gap-0 container mx-auto " + (!currentWeather || !forecast ? "justify-center" : "")
         }
       >
         <WeatherSearch onSearch={setCity} />
-        {currentWeather && (
-          <div className="flex flex-col md:flex-row gap-x-10 w-full">
+        {currentWeather && forecast && (
+          <div className="flex flex-col w-full">
             <WeatherDisplay weather={currentWeather} />
           </div>
         )}
