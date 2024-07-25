@@ -83,7 +83,7 @@ export function WeatherDisplay({ weather }) {
   ];
 
   return (
-    <div className="p-4 rounded-xl h-fit text-white flex-1 font-light">
+    <div className="rounded-xl h-fit text-white flex-1 font-light">
       <p className="text-6xl">
         {name}, {country}
       </p>
@@ -97,7 +97,7 @@ export function WeatherDisplay({ weather }) {
         <div className="flex-1">
           <img
             src={`./icons/openweathermap/${weatherDetails[0].icon}.svg`}
-            className="w-64"
+            className="w-64 md:w-44 mx-auto"
             alt=""
           />
         </div>
@@ -119,7 +119,7 @@ export function WeatherDisplay({ weather }) {
             key={index}
             className={`h-full flex items-center justify-center ${item.extraClass}`}
           >
-            <p className="bg-white/10 py-2 rounded text-center w-full flex items-center justify-center">
+            <p className="bg-white/10 rounded text-center w-full flex items-center justify-center">
               {item.value}
               <span className="text-lg mt-4">{item.unit}</span>
               <img src={item.icon} alt="" className="w-12 inline pt-2 -mx-1" />
