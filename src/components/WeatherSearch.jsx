@@ -12,7 +12,6 @@ export function WeatherSearch({ onSearch }) {
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
       handleSearch();
     }
   };

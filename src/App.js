@@ -5,6 +5,7 @@ import {
 } from "./services/weatherService";
 import { WeatherSearch } from "./components/WeatherSearch";
 import { WeatherDisplay } from "./components/WeatherDisplay";
+import { WeatherForecast } from "./components/WeatherForecast";
 
 function App() {
   const dirArray = ["Clear", "Clouds", "Rain"];
@@ -58,6 +59,7 @@ function App() {
         {currentWeather && forecast && (
           <div className="flex flex-col w-full">
             <WeatherDisplay weather={currentWeather} />
+            <WeatherForecast forecast={forecast} />
           </div>
         )}
       </div>
