@@ -16,6 +16,7 @@ function App() {
   const [backgroundImg, setBackgroundImg] = useState("");
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
+  const [error, setError] = useState(null);
 
   const randomBackground = () => {
     let randImg = Math.floor(Math.random() * 7);
@@ -23,11 +24,20 @@ function App() {
   };
 
   const handleSearch = async () => {
-    const weatherResponse = await fetchCurrentWeather(city);
-    setWeatherDir(weatherResponse.data.weather[0].main);
-    setCurrentWeather(weatherResponse.data);
-    const forecastResponse = await fetchWeatherForecast(city);
-    setForecast(forecastResponse.data);
+    try {
+      const weatherResponse = await fetchCurrentWeather(city);
+      setWeatherDir(weatherResponse.data.weather[0].main);
+      setCurrentWeather(weatherResponse.data);
+      const forecastResponse = await fetchWeatherForecast(city);
+      setForecast(forecastResponse.data);
+    } catch (err) {
+      setCurrentWeather(null);
+      setForecast(null);
+      if (err.response.status === 404) {
+        setError("Oops, no city found with that name.");
+      } else setError("Error, something went wrong.");
+      console.error(err);
+    }
   };
 
   useEffect(() => {
@@ -52,16 +62,18 @@ function App() {
       ></div>
       <div
         className={
-          "absolute inset-0 z-10 py-4 px-4 min-h-screen w-full flex flex-col items-center gap-4 lg:gap-0 container mx-auto " + (!currentWeather || !forecast ? "justify-center" : "")
+          "absolute inset-0 z-10 py-4 px-4 min-h-screen w-full flex flex-col items-center gap-4 lg:gap-0 container mx-auto " +
+          (!currentWeather || !forecast ? "justify-center" : "")
         }
       >
         <WeatherSearch onSearch={setCity} />
-        {currentWeather && forecast && (
+        {(currentWeather && forecast && (
           <div className="flex flex-col w-full">
             <WeatherDisplay weather={currentWeather} />
             <WeatherForecast forecast={forecast} />
           </div>
-        )}
+        )) ||
+          (error && <p className="text-red-500 mt-2">{error}</p>)}
       </div>
     </main>
   );
