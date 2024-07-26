@@ -74,6 +74,13 @@ function App() {
           </div>
         )) ||
           (error && <p className="text-red-500 mt-2">{error}</p>)}
+        {!currentWeather && !forecast && (
+          <div className="fixed bottom-10 text-gray-300 text-center">
+            <a href="https://github.com/YevheniiYeremenko" target="_blanket">
+              Made by <u>Yevhenii Yeremenko</u>
+            </a>
+          </div>
+        )}
       </div>
     </main>
   );
