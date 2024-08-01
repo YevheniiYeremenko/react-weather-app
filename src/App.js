@@ -67,6 +67,7 @@ function App() {
           (!currentWeather || !forecast ? "justify-center" : "")
         }
       >
+        {!currentWeather && !forecast && <h1 className="text-4xl mb-2 text-white font-bold">Weather App</h1>}
         <WeatherSearch onSearch={setCity} />
         {(currentWeather && forecast && (
           <div className="flex flex-col w-full">
