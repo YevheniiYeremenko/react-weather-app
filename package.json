@@ -16,7 +16,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -38,6 +38,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.24.9",
+    "@babel/preset-env": "^7.25.0",
+    "@babel/preset-react": "^7.24.7",
+    "axios-mock-adapter": "^1.22.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^27.5.1",
     "tailwindcss": "^3.4.6"
   }
 }

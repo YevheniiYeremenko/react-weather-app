@@ -26,6 +26,7 @@ function App() {
   const handleSearch = async () => {
     try {
       const weatherResponse = await fetchCurrentWeather(city);
+      console.log(weatherResponse);
       setWeatherDir(weatherResponse.data.weather[0].main);
       setCurrentWeather(weatherResponse.data);
       const forecastResponse = await fetchWeatherForecast(city);
